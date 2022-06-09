@@ -11,9 +11,9 @@ PACKAGE_URL=https://github.com/jobovy/galpy/archive/main.tar.gz
 mkdir -p pyodide/packages/$PACKAGE_NAME
 cp $1 pyodide/packages/$PACKAGE_NAME
 cd pyodide/packages/$PACKAGE_NAME
-sed -i 's@.*url.*@ url:  '"$PACKAGE_URL"'@' meta.yml
-sed -i '@sha256@d' meta.yml
-sed -i '@md5@d' meta.yml
+sed -i 's@.*url.*@  url: '"$PACKAGE_URL"'@' meta.yml
+sed -i '/sha256/d' meta.yml
+sed -i '/md5/d' meta.yml
 cat meta.yml
 cd ../../
 
