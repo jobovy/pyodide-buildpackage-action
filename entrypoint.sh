@@ -23,5 +23,5 @@ git checkout $2
 make
 
 # Build
-python -m pyodide_build buildall --only '$PACKAGE_NAME' packages ../$OUTPUT_DIR
+python -m pyodide_build buildall --only "$PACKAGE_NAME" packages ../$OUTPUT_DIR
 
