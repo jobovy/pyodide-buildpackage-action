@@ -21,7 +21,6 @@ git clone https://github.com/pyodide/pyodide
 cd pyodide
 git checkout $2
 make
-pip install ./pyodide-build
 cd ..
 
 
