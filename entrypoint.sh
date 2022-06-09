@@ -1,7 +1,7 @@
 #!/bin/sh
 META_YML_PATH=$1
 PYODIDE_TAG=$2
-OUTPUT_DIR=$3
+OUTPUT_DIR=`realpath $3`
 PACKAGE_NAME=galpy
 #${GITHUB_REPOSITORY#*/}
 PACKAGE_URL=https://github.com/jobovy/galpy/archive/main.tar.gz
@@ -23,5 +23,5 @@ git checkout $2
 make
 
 # Build
-python -m pyodide_build buildall --only "$PACKAGE_NAME" packages ../$OUTPUT_DIR
+python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $OUTPUT_DIR
 
