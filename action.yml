@@ -16,7 +16,7 @@ inputs:
 runs:
   using: 'docker'
   image: docker://pyodide/pyodide-env:20220525-py310-chrome102-firefox100
-  entrypoint: entrypoint.sh
+  entrypoint: 'entrypoint.sh'
   args:
       - ${{ inputs.meta-yml-path }}
       - ${{ inputs.pyodide-tag }}
