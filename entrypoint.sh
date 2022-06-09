@@ -21,8 +21,6 @@ git clone https://github.com/pyodide/pyodide
 cd pyodide
 git checkout $2
 make
-cd ..
-
 
 # Build
 python -m pyodide_build buildall --only '$PACKAGE_NAME' packages ../$OUTPUT_DIR
