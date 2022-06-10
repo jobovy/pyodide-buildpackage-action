@@ -27,14 +27,16 @@ cd pyodide
 git checkout $2
 make
 
-# Download the package and put meta.yaml in place
+# Put meta.yaml in place
 mkdir -v -p packages/$PACKAGE_NAME
 cp -v $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
+# Need to download to compute the checksum, required when using url
 wget -v $PACKAGE_URL -O packages/$PACKAGE_NAME/package.tar.gz
-PACKAGE_PATH=`realpath packages/$PACKAGE_NAME/package.tar.gz`
+CHECKSUM=($(sha256sum packages/$PACKAGE_NAME/package.tar.gz))
+# Edit meta.yaml
 sed --debug -i 's@.*version:.*@  version: '"$PACKAGE_VERSION"'@' packages/$PACKAGE_NAME/meta.yaml
-sed --debug -i 's@.*url:.*@  path: '"$PACKAGE_PATH"'@' packages/$PACKAGE_NAME/meta.yaml
-sed --debug -i '/sha256:/d' packages/$PACKAGE_NAME/meta.yaml
+sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
+sed --debug -i 's@.*sha256:.*@  sha256: '"$CHECKSUM"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
 cat packages/$PACKAGE_NAME/meta.yaml
 
