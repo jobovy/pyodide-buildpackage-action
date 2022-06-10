@@ -13,6 +13,22 @@ inputs:
     description: 'Directory for output wheel'
     required: false
     default: 'wheelhouse'
+  package-name:
+    description: 'Name of the package being built (default: repository name)'
+    required: false
+    default: 'None'
+  package-version:
+    description: 'Version in the output wheel name (doesn't have to match package version'
+    required: false
+    default: 'latest'
+  build-tag:
+    description: 'When building the current repository, name of the branch/tag/SHA to build (default: commit's SHA); set either this or build-url (neither defaults to current SHA)'
+    required: false
+    default: 'None'    
+  build-url:
+    description: 'URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA)'
+    required: false
+    default: 'None'    
 runs:
   using: 'docker'
   image: Dockerfile
@@ -20,3 +36,7 @@ runs:
       - ${{ inputs.meta-yaml-path }}
       - ${{ inputs.pyodide-tag }}
       - ${{ inputs.output-dir }}
+      - ${{ inputs.package-name }}
+      - ${{ inputs.package-version }}
+      - ${{ inputs.build-tag }}
+      - ${{ inputs.build-url }}
