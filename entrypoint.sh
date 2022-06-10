@@ -28,16 +28,16 @@ git checkout $2
 make
 
 # Put meta.yaml in place
-mkdir -p packages/$PACKAGE_NAME
-cp $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
-sed -i 's@.*version.*@  version: '"$PACKAGE_VERSION"'@' packages/$PACKAGE_NAME/meta.yaml
-sed -i 's@.*url.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
-sed -i '/sha256/d' packages/$PACKAGE_NAME/meta.yaml
-sed -i '/md5/d' packages/$PACKAGE_NAME/meta.yaml
+mkdir -v -p packages/$PACKAGE_NAME
+cp -v $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
+sed --debug -i 's@.*version:.*@  version: '"$PACKAGE_VERSION"'@' packages/$PACKAGE_NAME/meta.yaml
+sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
+sed --debug -i '/sha256:/d' packages/$PACKAGE_NAME/meta.yaml
+sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
 cat packages/$PACKAGE_NAME/meta.yaml
 
 # Build and copy output to output directory
 python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
-mkdir -p $OUTPUT_DIR
+mkdir -v -p $OUTPUT_DIR
 cp -v $ALL_WHEELS_OUTPUT_DIR/*$PACKAGE_NAME* $OUTPUT_DIR
 
