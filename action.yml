@@ -1,36 +1,36 @@
-name: 'pyodide-buildpackage-action'
-description: 'Build pyodide packages in GitHub Actions'
+name: "pyodide-buildpackage-action"
+description: "Build pyodide packages in GitHub Actions"
 inputs:
   meta-yaml-path:
-    description: 'Path of the meta.yaml file'
+    description: "Path of the meta.yaml file"
     required: false
-    default: 'meta.yaml'
+    default: "meta.yaml"
   pyodide-tag:
-    description: 'Pyodide tag or branch to use'
+    description: "Pyodide tag or branch to use"
     required: false
-    default: '0.20.0'
+    default: "0.20.0"
   output-dir:
-    description: 'Directory for output wheel'
+    description: "Directory for output wheel"
     required: false
-    default: 'wheelhouse'
+    default: "wheelhouse"
   package-name:
-    description: 'Name of the package being built (default: repository name)'
+    description: "Name of the package being built (default: repository name)"
     required: false
-    default: 'None'
+    default: "None"
   package-version:
-    description: 'Version in the output wheel name (does not have to match package version)'
+    description: "Version in the output wheel name (does not have to match package version)"
     required: false
-    default: 'latest'
+    default: "latest"
   build-tag:
-    description: 'When building the current repository, name of the branch/tag/SHA to build (default: commit's SHA); set either this or build-url (neither defaults to current SHA)'
+    description: "When building the current repository, name of the branch/tag/SHA to build (default: commit's SHA); set either this or build-url (neither defaults to current SHA)"
     required: false
-    default: 'None'    
+    default: "None"    
   build-url:
-    description: 'URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA)'
+    description: "URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA)"
     required: false
-    default: 'None'    
+    default: "None"    
 runs:
-  using: 'docker'
+  using: "docker"
   image: Dockerfile
   args:
       - ${{ inputs.meta-yaml-path }}
