@@ -1,5 +1,5 @@
 #!/bin/sh
-META_YML_PATH=`realpath $1`
+META_YAML_PATH=`realpath $1`
 PYODIDE_TAG=$2
 OUTPUT_DIR=`realpath $3`
 PACKAGE_NAME=galpy
@@ -13,13 +13,13 @@ cd pyodide
 git checkout $2
 make
 
-# Put meta.yml in place
+# Put meta.yaml in place
 mkdir -p packages/$PACKAGE_NAME
-cp $META_YML_PATH packages/$PACKAGE_NAME/meta.yml
-sed -i 's@.*url.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yml
-sed -i '/sha256/d' packages/$PACKAGE_NAME/meta.yml
-sed -i '/md5/d' packages/$PACKAGE_NAME/meta.yml
-cat packages/$PACKAGE_NAME/meta.yml
+cp $META_YML_PATH packages/$PACKAGE_NAME/meta.yaml
+sed -i 's@.*url.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
+sed -i '/sha256/d' packages/$PACKAGE_NAME/meta.yaml
+sed -i '/md5/d' packages/$PACKAGE_NAME/meta.yaml
+cat packages/$PACKAGE_NAME/meta.yaml
 
 # Build
 python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $OUTPUT_DIR

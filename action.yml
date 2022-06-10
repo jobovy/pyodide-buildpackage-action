@@ -1,10 +1,10 @@
 name: 'pyodide-buildpackage-action'
 description: 'Build pyodide packages in GitHub Actions'
 inputs:
-  meta-yml-path:
-    description: 'Path of the meta.yml file'
+  meta-yaml-path:
+    description: 'Path of the meta.yaml file'
     required: false
-    default: 'meta.yml'
+    default: 'meta.yaml'
   pyodide-tag:
     description: 'Pyodide tag or branch to use'
     required: false
@@ -17,6 +17,6 @@ runs:
   using: 'docker'
   image: Dockerfile
   args:
-      - ${{ inputs.meta-yml-path }}
+      - ${{ inputs.meta-yaml-path }}
       - ${{ inputs.pyodide-tag }}
       - ${{ inputs.output-dir }}
