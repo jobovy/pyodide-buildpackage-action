@@ -18,7 +18,7 @@ inputs:
     required: false
     default: 'None'
   package-version:
-    description: 'Version in the output wheel name (doesn't have to match package version'
+    description: 'Version in the output wheel name (doesn't have to match package version)'
     required: false
     default: 'latest'
   build-tag:
