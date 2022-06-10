@@ -19,6 +19,7 @@ if [ "$6" = "None" ]; then
 else
     PACKAGE_URL=https://github.com/GITHUB_REPOSITORY/archive/$6.tar.gz
 fi
+ALL_WHEELS_OUTPUT_DIR=`realpath $8`
 
 # Get pyodide and setup pyodide tools
 git clone https://github.com/pyodide/pyodide
@@ -35,6 +36,8 @@ sed -i '/sha256/d' packages/$PACKAGE_NAME/meta.yaml
 sed -i '/md5/d' packages/$PACKAGE_NAME/meta.yaml
 cat packages/$PACKAGE_NAME/meta.yaml
 
-# Build
-python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $OUTPUT_DIR
+# Build and copy output to output directory
+python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
+cp -v $ALL_WHEELS_OUTPUT_DIR/*$PACKAGE_NAME* $OUTPUT_DIR
 

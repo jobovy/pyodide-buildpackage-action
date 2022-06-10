@@ -10,9 +10,13 @@ inputs:
     required: false
     default: "0.20.0"
   output-dir:
-    description: "Directory for output wheel"
+    description: "Directory for output package wheel"
     required: false
     default: "wheelhouse"
+  all-wheels-output-dir:
+    description: "Directory for all built wheels"
+    required: false
+    default: "wheelhouse-all"
   package-name:
     description: "Name of the package being built (default: repository name)"
     required: false
@@ -40,3 +44,4 @@ runs:
       - ${{ inputs.package-version }}
       - ${{ inputs.build-tag }}
       - ${{ inputs.build-url }}
+      - ${{ inputs.all-wheels-output-dir }}
