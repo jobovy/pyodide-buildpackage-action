@@ -15,7 +15,7 @@ make
 
 # Put meta.yaml in place
 mkdir -p packages/$PACKAGE_NAME
-cp $META_YML_PATH packages/$PACKAGE_NAME/meta.yaml
+cp $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
 sed -i 's@.*url.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
 sed -i '/sha256/d' packages/$PACKAGE_NAME/meta.yaml
 sed -i '/md5/d' packages/$PACKAGE_NAME/meta.yaml
