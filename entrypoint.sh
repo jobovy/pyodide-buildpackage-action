@@ -11,12 +11,12 @@ else
 fi
 if [ "$5" = "None" ]; then
     if [ "$6" = "None" ]; then
-        PACKAGE_URL=https://github.com/GITHUB_REPOSITORY/archive/$GITHUB_SHA.tar.gz
+        PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$GITHUB_SHA.tar.gz
     else
         PACKAGE_URL=$6
     fi
 else
-    PACKAGE_URL=https://github.com/GITHUB_REPOSITORY/archive/$5.tar.gz
+    PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$5.tar.gz
 fi
 ALL_WHEELS_OUTPUT_DIR=`realpath $7`
 
