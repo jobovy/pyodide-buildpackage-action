@@ -9,17 +9,16 @@ if [ "$4" = "None" ]; then
 else
     PACKAGE_NAME=$4
 fi
-PACKAGE_VERSION=$5
-if [ "$6" = "None" ]; then
-    if [ "$7" = "None" ]; then
-        PACKAGE_URL=https://github.com/GITHUB_REPOSITORY/archive/$GITHUB_SHA.tar.gz
+if [ "$5" = "None" ]; then
+    if [ "$6" = "None" ]; then
+        PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$GITHUB_SHA.tar.gz
     else
-        PACKAGE_URL=$7
+        PACKAGE_URL=$6
     fi
 else
-    PACKAGE_URL=https://github.com/GITHUB_REPOSITORY/archive/$6.tar.gz
+    PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$5.tar.gz
 fi
-ALL_WHEELS_OUTPUT_DIR=`realpath $8`
+ALL_WHEELS_OUTPUT_DIR=`realpath $7`
 
 # Get pyodide and setup pyodide tools
 git clone https://github.com/pyodide/pyodide
@@ -34,7 +33,6 @@ cp -v $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
 wget -v $PACKAGE_URL -O packages/$PACKAGE_NAME/package.tar.gz
 CHECKSUM=`sha256sum packages/$PACKAGE_NAME/package.tar.gz | awk '{ print $1 }'`
 # Edit meta.yaml
-sed --debug -i 's@.*version:.*@  version: '"$PACKAGE_VERSION"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i 's@.*sha256:.*@  sha256: '"$CHECKSUM"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
