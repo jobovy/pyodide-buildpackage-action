@@ -1,0 +1,47 @@
+name: "pyodide-buildpackage-action"
+description: "Build pyodide packages in GitHub Actions"
+inputs:
+  meta-yaml-path:
+    description: "Path of the meta.yaml file"
+    required: false
+    default: "meta.yaml"
+  pyodide-tag:
+    description: "Pyodide tag or branch to use"
+    required: false
+    default: "0.20.0"
+  output-dir:
+    description: "Directory for output package wheel"
+    required: false
+    default: "wheelhouse"
+  all-wheels-output-dir:
+    description: "Directory for all built wheels"
+    required: false
+    default: "wheelhouse-all"
+  package-name:
+    description: "Name of the package being built (default: repository name)"
+    required: false
+    default: "None"
+  package-version:
+    description: "Version in the output wheel name (does not have to match package version)"
+    required: false
+    default: "latest"
+  build-tag:
+    description: "When building the current repository, name of the branch/tag/SHA to build (default: commit's SHA); set either this or build-url (neither defaults to current SHA)"
+    required: false
+    default: "None"    
+  build-url:
+    description: "URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA)"
+    required: false
+    default: "None"    
+runs:
+  using: "docker"
+  image: Dockerfile
+  args:
+      - ${{ inputs.meta-yaml-path }}
+      - ${{ inputs.pyodide-tag }}
+      - ${{ inputs.output-dir }}
+      - ${{ inputs.package-name }}
+      - ${{ inputs.package-version }}
+      - ${{ inputs.build-tag }}
+      - ${{ inputs.build-url }}
+      - ${{ inputs.all-wheels-output-dir }}
