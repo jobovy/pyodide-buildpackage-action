@@ -32,15 +32,14 @@ CHECKSUM=`sha256sum packages/$PACKAGE_NAME/package.tar.gz | awk '{ print $1 }'`
 sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i 's@.*sha256:.*@  sha256: '"$CHECKSUM"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
-if [ "$8" = "False" ];
-    then
-         export PACKAGE_NAME
-         python -c "import os; PACKAGE_NAME=os.environ['PACKAGE_NAME']; from pathlib import Path; from ruamel.yaml import YAML; yaml= YAML(); f= yaml.load(Path(f'packages/{PACKAGE_NAME}/meta.yaml')); del f['requirements']; yaml.dump(f,Path(f'packages/{PACKAGE_NAME}/meta_e.yaml'))"
-         npx prettier -w packages/$PACKAGE_NAME/meta_e.yaml
-         mv packages/$PACKAGE_NAME/meta_e.yaml packages/$PACKAGE_NAME/meta.yaml
-    fi;
+if [ "$BUILD_DEPS" = "False" ];
+then
+    export PACKAGE_NAME
+    python -c "import os; PACKAGE_NAME=os.environ['PACKAGE_NAME']; from pathlib import Path; from ruamel.yaml import YAML; yaml= YAML(); f= yaml.load(Path(f'packages/{PACKAGE_NAME}/meta.yaml')); del f['requirements']; yaml.dump(f,Path(f'packages/{PACKAGE_NAME}/meta_e.yaml'))"
+    npx prettier -w packages/$PACKAGE_NAME/meta_e.yaml
+    mv packages/$PACKAGE_NAME/meta_e.yaml packages/$PACKAGE_NAME/meta.yaml
+fi;
 cat packages/$PACKAGE_NAME/meta.yaml
-
 
 
 # Get pyodide and setup pyodide tools
@@ -59,13 +58,13 @@ CHECKSUM=`sha256sum packages/$PACKAGE_NAME/package.tar.gz | awk '{ print $1 }'`
 sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i 's@.*sha256:.*@  sha256: '"$CHECKSUM"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
-if [ "$8" = "False" ];
-    then
-         export PACKAGE_NAME
-         python -c "import os; PACKAGE_NAME=os.environ['PACKAGE_NAME']; from pathlib import Path; from ruamel.yaml import YAML; yaml= YAML(); f= yaml.load(Path(f'packages/{PACKAGE_NAME}/meta.yaml')); del f['requirements']; yaml.dump(f,Path(f'packages/{PACKAGE_NAME}/meta_e.yaml'))"
-         npx prettier -w packages/$PACKAGE_NAME/meta_e.yaml
-         mv packages/$PACKAGE_NAME/meta_e.yaml packages/$PACKAGE_NAME/meta.yaml
-    fi;
+if [ "$BUILD_DEPS" = "False" ];
+then
+    export PACKAGE_NAME
+    python -c "import os; PACKAGE_NAME=os.environ['PACKAGE_NAME']; from pathlib import Path; from ruamel.yaml import YAML; yaml= YAML(); f= yaml.load(Path(f'packages/{PACKAGE_NAME}/meta.yaml')); del f['requirements']; yaml.dump(f,Path(f'packages/{PACKAGE_NAME}/meta_e.yaml'))"
+    npx prettier -w packages/$PACKAGE_NAME/meta_e.yaml
+    mv packages/$PACKAGE_NAME/meta_e.yaml packages/$PACKAGE_NAME/meta.yaml
+fi;
 cat packages/$PACKAGE_NAME/meta.yaml
 
 # Build and copy output to output directory
