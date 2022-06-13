@@ -69,6 +69,10 @@ cat packages/$PACKAGE_NAME/meta.yaml
 
 # Build and copy output to output directory
 python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
+echo "Build log"
+cat packages/$PACKAGE_NAME/build.log
+
+# Copy wheel to output dir
 mkdir -v -p $OUTPUT_DIR
 cp -v $ALL_WHEELS_OUTPUT_DIR/*$PACKAGE_NAME* $OUTPUT_DIR
 
