@@ -30,9 +30,9 @@ inputs:
     required: false
     default: "None"    
   build-deps:
-    description: "Whether or not to build runtime dependencies (True/False)"
+    description: "Whether or not to build runtime Python dependencies (True/False)"
     required: false
-    default: "True"    
+    default: "True" 
 runs:
   using: "docker"
   image: Dockerfile
