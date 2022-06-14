@@ -2,30 +2,26 @@
 
 # Parse inputs 
 META_YAML_PATH=`realpath $1`
-PYODIDE_TAG=$2
-OUTPUT_DIR=`realpath $3`
-if [ "$4" = "None" ]; then
+OUTPUT_DIR=`realpath $2`
+if [ "$3" = "None" ]; then
     PACKAGE_NAME=${GITHUB_REPOSITORY#*/}
 else
-    PACKAGE_NAME=$4
+    PACKAGE_NAME=$3
 fi
-if [ "$5" = "None" ]; then
-    if [ "$6" = "None" ]; then
+if [ "$4" = "None" ]; then
+    if [ "$5" = "None" ]; then
         PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$GITHUB_SHA.tar.gz
     else
-        PACKAGE_URL=$6
+        PACKAGE_URL=$5
     fi
 else
-    PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$5.tar.gz
+    PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$4.tar.gz
 fi
-ALL_WHEELS_OUTPUT_DIR=`realpath $7`
-BUILD_DEPS=$8
+ALL_WHEELS_OUTPUT_DIR=`realpath $6`
+BUILD_DEPS=$7
 
-# Get pyodide and setup pyodide tools
-git clone https://github.com/pyodide/pyodide
+# Get pyodide and setup pyodide tools (from build-pyodide)
 cd pyodide
-git checkout $2
-make
 
 # Put meta.yaml in place
 mkdir -v -p packages/$PACKAGE_NAME

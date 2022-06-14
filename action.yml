@@ -34,14 +34,19 @@ inputs:
     required: false
     default: "False" 
 runs:
-  using: "docker"
-  image: Dockerfile
-  args:
-      - ${{ inputs.meta-yaml-path }}
-      - ${{ inputs.pyodide-tag }}
-      - ${{ inputs.output-dir }}
-      - ${{ inputs.package-name }}
-      - ${{ inputs.build-tag }}
-      - ${{ inputs.build-url }}
-      - ${{ inputs.all-wheels-output-dir }}
-      - ${{ inputs.build-deps }}
+  using: "composite"
+  steps:
+    - name: Build pyodide
+      uses: actions/build-pyodide
+      with:
+        pyodide-tag: ${{ inputs.pyodide-tag }}
+    - name: Build package
+      uses: actions/build-package
+      with: 
+        meta-yaml-path: ${{ inputs.meta-yaml-path }}
+        output-dir: ${{ inputs.output-dir }}
+        package-name: ${{ inputs.package-name }}
+        build-tag: ${{ inputs.build-tag }}
+        build-url: ${{ inputs.build-url }}
+        all-wheels-output-dir: ${{ inputs.all-wheels-output-dir }}
+        build-deps: ${{ inputs.build-deps }}
