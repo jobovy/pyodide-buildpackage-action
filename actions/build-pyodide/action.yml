@@ -7,6 +7,6 @@ inputs:
     default: "0.20.0"
 runs:
   using: "docker"
-  image: ../../Dockerfile
+  image: Dockerfile
   args:
       - ${{ inputs.pyodide-tag }}
