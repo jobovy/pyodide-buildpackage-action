@@ -37,11 +37,11 @@ runs:
   using: "composite"
   steps:
     - name: Build pyodide
-      uses: ./actions/build-pyodide
+      uses: jobovy/pyodide-buildpackage-action/actions/build-pyodide
       with:
         pyodide-tag: ${{ inputs.pyodide-tag }}
     - name: Build package
-      uses: ./actions/build-package
+      uses: jobovy/pyodide-buildpackage-action/actions/build-package
       with: 
         meta-yaml-path: ${{ inputs.meta-yaml-path }}
         output-dir: ${{ inputs.output-dir }}
