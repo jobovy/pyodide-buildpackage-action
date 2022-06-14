@@ -115,7 +115,7 @@ This action has the following basic steps:
 - Create the new packages's `meta.yaml` file with `jobovy/pyodide-buildpackage-action/actions/build-meta@main`. By default, this will build the current commit of the repository that contains this action
 - Build the new package with `jobovy/pyodide-buildpackage-action/actions/build-package@main`.
 
-To build multiple packages, you can run the second step twice or more (or you can just copy the relevant `meta.yaml` into the correct `pyodide/packages/..` location). When running the final build step, you then have to set `package-name` to a comma-separated list of all of the packages that you want to build.
+To build multiple packages, you can run the second step twice or more (or you can just copy the relevant `meta.yaml` into the correct `pyodide/packages/..` location). Note that you have to specify the `build-url` even if it is already in your `meta.yaml`, because it will be replaced by this action. When running the final build step, you then have to set `package-name` to a comma-separated list of all of the packages that you want to build.
 
 Look at [the steps in action.yml](action.yml) for more details on how to run the steps and how to set up caching of the `pyodide` build.
 
