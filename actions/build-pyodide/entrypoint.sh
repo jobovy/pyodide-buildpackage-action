@@ -5,7 +5,7 @@ PYODIDE_TAG=$1
 PYODIDE_CACHE_HIT=$2
 
 # Get pyodide and setup pyodide tools
-if [ "$PYODIDE_CACHE_HIT" = "false" ];
+if [ "$PYODIDE_CACHE_HIT" = "false" ] || [ "$PYODIDE_CACHE_HIT" = "" ];
 then
     git clone https://github.com/pyodide/pyodide
     cd pyodide
