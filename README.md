@@ -20,6 +20,16 @@ jobs:
         path: wheelhouse/*.whl
 ```
 
+You can then use the generated wheel in `pyodide`. Put your wheel at some URL and then load the wheel in `pyodide` with
+```
+import pyodide_js
+await pyodide_js.loadPackage(["https://URL/OF/YOUR/WHEEL.whl"])
+```
+Note that because at the time of writing, `pyodide` does not resolve and load dependencies when loading a wheel from a URL, you need to explicitly load any dependencies that you need. E.g., if you need `numpy` in the wheel, do
+```
+await pyodide_js.loadPackage(["numpy","https://URL/OF/YOUR/WHEEL.whl"])
+```
+
 Also see the [Advanced examples](#Advanced-examples) below.
 
 ## Inputs
@@ -95,3 +105,18 @@ E.g., to use the latest `main` branch
         meta-yaml-path: .github/pyodide_meta.yaml
         build-deps: True
 ```
+
+### Building multiple packages
+
+This action is set up to build a single package that is not already contained in `pyodide` (either a new package or an updated version of a package that already exists within `pyodide`). However, the action is composed of a set of simple individual steps and if you want to build multiple packages, you can do this by running the steps yourself and adding additional packages that you want to use.
+
+This action has the following basic steps:
+- Build `pyodide` using `jobovy/pyodide-buildpackage-action/actions/build-pyodide@main`: this checks out the `pyodide` repository and build all of the basic tools to build packages
+- Create the new packages's `meta.yaml` file with `jobovy/pyodide-buildpackage-action/actions/build-meta@main`. By default, this will build the current commit of the repository that contains this action
+- Build the new package with `jobovy/pyodide-buildpackage-action/actions/build-package@main`.
+
+To build multiple packages, you can run the second step twice or more (or you can just copy the relevant `meta.yaml` into the correct `pyodide/packages/..` location). When running the final build step, you then have to set `package-name` to a comma-separated list of all of the packages that you want to build.
+
+Look at [the steps in action.yml](action.yml) for more details on how to run the steps and how to set up caching of the `pyodide` build.
+
+
