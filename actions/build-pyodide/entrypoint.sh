@@ -11,6 +11,9 @@ then
     cd pyodide
     git checkout $PYODIDE_TAG
 else
+    # Necessary to avoid weird permissions errors
+    sudo find pyodide -type d -exec chmod 755 {} \; 
+    sudo find pyodide -type f -exec chmod 644 {} \;
     cd pyodide
 fi;
 make
