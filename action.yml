@@ -46,13 +46,19 @@ runs:
       with:
         pyodide-tag: ${{ inputs.pyodide-tag }}
         pyodide-cache-hit: ${{ steps.cache-pyodide.outputs.cache-hit }}
-    - name: Build package
-      uses: jobovy/pyodide-buildpackage-action/actions/build-package@cache
+    - name: Build meta.yaml
+      uses: jobovy/pyodide-buildpackage-action/actions/build-meta@cache
       with: 
         meta-yaml-path: ${{ inputs.meta-yaml-path }}
-        output-dir: ${{ inputs.output-dir }}
         package-name: ${{ inputs.package-name }}
         build-tag: ${{ inputs.build-tag }}
         build-url: ${{ inputs.build-url }}
+        build-deps: ${{ inputs.build-deps }}    - name: Build package
+      uses: jobovy/pyodide-buildpackage-action/actions/build-package@cache
+      with: 
+        output-dir: ${{ inputs.output-dir }}
         all-wheels-output-dir: ${{ inputs.all-wheels-output-dir }}
-        build-deps: ${{ inputs.build-deps }}
+    - name: Change permissions of pyodide directory
+      run: |
+        sudo find pyodide -type d -exec chmod 755 {} \; 
+        sudo find pyodide -type f -exec chmod 644 {} \;
