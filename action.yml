@@ -53,7 +53,8 @@ runs:
         package-name: ${{ inputs.package-name }}
         build-tag: ${{ inputs.build-tag }}
         build-url: ${{ inputs.build-url }}
-        build-deps: ${{ inputs.build-deps }}    - name: Build package
+        build-deps: ${{ inputs.build-deps }}
+    - name: Build package
       uses: jobovy/pyodide-buildpackage-action/actions/build-package@cache
       with: 
         output-dir: ${{ inputs.output-dir }}
