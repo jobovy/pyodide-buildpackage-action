@@ -60,6 +60,7 @@ runs:
         output-dir: ${{ inputs.output-dir }}
         all-wheels-output-dir: ${{ inputs.all-wheels-output-dir }}
     - name: Change permissions of pyodide directory
+      shell: bash 
       run: |
         sudo find pyodide -type d -exec chmod 755 {} \; 
         sudo find pyodide -type f -exec chmod 644 {} \;
