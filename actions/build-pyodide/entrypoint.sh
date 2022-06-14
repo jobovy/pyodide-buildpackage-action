@@ -13,4 +13,4 @@ then
 else
     cd pyodide
 fi;
-make
+#make
