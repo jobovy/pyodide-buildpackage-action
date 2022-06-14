@@ -64,7 +64,7 @@ fi;
 cat packages/$PACKAGE_NAME/meta.yaml
 
 # Build and copy output to output directory
-make
+#make
 python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
 echo "Build log"
 cat packages/$PACKAGE_NAME/build.log

@@ -39,7 +39,7 @@ runs:
     - uses: actions/cache@v3
       id: cache-pyodide
       with:
-        path: ~/pyodide/**
+        path: ${{ github.GITHUB_WORKSPACE }}/pyodide/**
         key: pyodide-cache-${{ inputs.pyodide-tag }}
     - name: Build pyodide
       uses: jobovy/pyodide-buildpackage-action/actions/build-pyodide@cache
