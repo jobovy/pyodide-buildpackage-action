@@ -36,10 +36,16 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/cache@v2
+      id: cache-pyodide
+      with:
+        path: ~/pyodide/**
+        key: pyodide-cache-${{ inputs.pyodide-tag }}
     - name: Build pyodide
       uses: jobovy/pyodide-buildpackage-action/actions/build-pyodide@cache
       with:
         pyodide-tag: ${{ inputs.pyodide-tag }}
+        pyodide-cache-hit: ${{ steps.cache-pyodide.outputs.cache-hit }}
     - name: Build package
       uses: jobovy/pyodide-buildpackage-action/actions/build-package@cache
       with: 
