@@ -1,8 +1,13 @@
 #!/bin/sh
 
 # Parse inputs 
-OUTPUT_DIR=`realpath $1`
-ALL_WHEELS_OUTPUT_DIR=`realpath $2`
+if [ "$1" = "None" ]; then
+    PACKAGE_NAME=${GITHUB_REPOSITORY#*/}
+else
+    PACKAGE_NAME=$1
+fi
+OUTPUT_DIR=`realpath $2`
+ALL_WHEELS_OUTPUT_DIR=`realpath $3`
 
 # Get pyodide and setup pyodide tools (from build-pyodide)
 cd pyodide

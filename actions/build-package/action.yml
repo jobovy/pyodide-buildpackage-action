@@ -1,6 +1,10 @@
 name: "build-package"
 description: "Build pyodide package"
 inputs:
+  package-name:
+    description: "Name of the package being built (default: repository name; needs to be set when building a URL)"
+    required: false
+    default: "None"
   output-dir:
     description: "Directory for output package wheel"
     required: false
@@ -13,5 +17,6 @@ runs:
   using: "docker"
   image: Dockerfile
   args:
+      - ${{ inputs.package-name }}
       - ${{ inputs.output-dir }}
       - ${{ inputs.all-wheels-output-dir }}

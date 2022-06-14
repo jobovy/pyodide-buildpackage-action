@@ -57,6 +57,7 @@ runs:
     - name: Build package
       uses: jobovy/pyodide-buildpackage-action/actions/build-package@cache
       with: 
+        package-name: ${{ inputs.package-name }}
         output-dir: ${{ inputs.output-dir }}
         all-wheels-output-dir: ${{ inputs.all-wheels-output-dir }}
     - name: Change permissions of pyodide directory
