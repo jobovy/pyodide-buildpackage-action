@@ -54,6 +54,10 @@ When building the current repository, name of the branch/tag/SHA to build (defau
 
 URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA)
 
+### `build-deps`
+
+Whether or not to build runtime Python dependencies (True/False; default: False). If you need a Python dependency during your build (e.g., `numpy`), then you'll have to run with `build-deps: True`.
+
 ## Advanced examples
 
 ### Custom ``meta.yaml`` location
@@ -81,4 +85,13 @@ E.g., to use the latest `main` branch
       with:
         package-name: galpy
         build-url: https://github.com/jobovy/galpy/archive/main.tar.gz
+```
+
+### Build all dependencies of your package
+
+```
+    - uses: jobovy/pyodide-buildpackage-action@main
+      with:
+        meta-yaml-path: .github/pyodide_meta.yaml
+        build-deps: True
 ```
