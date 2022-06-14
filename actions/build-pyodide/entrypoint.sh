@@ -9,7 +9,7 @@ if [ "$PYODIDE_CACHE_HIT" -ne "true" ];
 then
     git clone https://github.com/pyodide/pyodide
     cd pyodide
-    #git checkout $PYODIDE_TAG
+    git checkout $PYODIDE_TAG
 else
     cd pyodide
 fi;
