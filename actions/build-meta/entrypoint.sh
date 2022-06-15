@@ -25,14 +25,14 @@ cd pyodide
 mkdir -v -p packages/$PACKAGE_NAME
 cp -v $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
 # Need to download to compute the checksum, required when using url
-wget -v $PACKAGE_URL -O packages/$PACKAGE_NAME/package.tar.gz
+wget $PACKAGE_URL -O packages/$PACKAGE_NAME/package.tar.gz
 CHECKSUM=`sha256sum packages/$PACKAGE_NAME/package.tar.gz | awk '{ print $1 }'`
 # Edit meta.yaml
 sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i 's@.*sha256:.*@  sha256: '"$CHECKSUM"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
 # Need to move this to a file...
-if [ "$BUILD_DEPS" = "false" ];
+if [ "$BUILD_DEPS" = "false" ] || [ "$BUILD_DEPS" = "False" ];
 then
     export PACKAGE_NAME
     python -c "import os

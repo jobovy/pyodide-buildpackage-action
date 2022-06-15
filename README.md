@@ -115,11 +115,11 @@ E.g., to use the latest `main` branch
 This action is set up to build a single package that is not already contained in `pyodide` (either a new package or an updated version of a package that already exists within `pyodide`). However, the action is composed of a set of simple individual steps and if you want to build multiple packages, you can do this by running the steps yourself and adding additional packages that you want to use.
 
 This action has the following basic steps:
-- Build `pyodide` using `jobovy/pyodide-buildpackage-action/actions/build-pyodide@main`: this checks out the `pyodide` repository and build all of the basic tools to build packages
-- Create the new packages's `meta.yaml` file with `jobovy/pyodide-buildpackage-action/actions/build-meta@main`. By default, this will build the current commit of the repository that contains this action
-- Build the new package with `jobovy/pyodide-buildpackage-action/actions/build-package@main`.
+- Build `pyodide` using `jobovy/pyodide-buildpackage-action/actions/build-pyodide`: this checks out the `pyodide` repository and build all of the basic tools to build packages
+- Create the new packages's `meta.yaml` file with `jobovy/pyodide-buildpackage-action/actions/build-meta`. By default, this will build the current commit of the repository that contains this action
+- Build the new package with `jobovy/pyodide-buildpackage-action/actions/build-package`.
 
-To build multiple packages, you can run the second step twice or more (or you can just copy the relevant `meta.yaml` into the correct `pyodide/packages/..` location). Note that you have to specify the `build-url` even if it is already in your `meta.yaml`, because it will be replaced by this action. When running the final build step, you then have to set `package-name` to a comma-separated list of all of the packages that you want to build.
+To build multiple packages, you can run the second step twice or more (or you can just copy the relevant `meta.yaml` into the correct `pyodide/packages/..` location). Note that you have to specify the `build-url` even if it is already in your `meta.yaml`, because it will be replaced by this action. Note also that, because the `meta.yaml` file of dependencies is read when building a `meta.yaml` file with `jobovy/pyodide-buildpackage-action/actions/build-meta`, you need to build the `meta.yaml` of your dependencies before that of the package you want to build. When running the final build step, you then have to set `package-name` to a comma-separated list of all of the packages that you want to build.
 
 Look at [the steps in action.yml](action.yml) for more details on how to run the steps and how to set up caching of the `pyodide` build.
 
