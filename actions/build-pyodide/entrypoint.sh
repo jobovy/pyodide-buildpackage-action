@@ -11,8 +11,7 @@ then
     cd pyodide
     git checkout $PYODIDE_TAG
 else
-    cd pyodide/emsdk/emsdk/
-    . emsdk_env.sh
-    cd ../../
+    cd pyodide
+    ./emsdk/emsdk/emsdk activate --embedded
 fi;
 make
