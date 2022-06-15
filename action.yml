@@ -60,9 +60,10 @@ runs:
         package-name: ${{ inputs.package-name }}
         output-dir: ${{ inputs.output-dir }}
         all-wheels-output-dir: ${{ inputs.all-wheels-output-dir }}
+    # Just make everything executable, because a bunch of stuff needs to be
+    # and it isn't alltogether obvious which (not just .sh)
     - name: Change permissions of pyodide directory
       shell: bash 
       run: |
         sudo find pyodide -type d -exec chmod 755 {} \; 
-        sudo find pyodide -type f -exec chmod 644 {} \;
-        sudo find pyodide -type f -iname "*.sh" -exec chmod 755 {} \;
+        sudo find pyodide -type f -exec chmod 755 {} \;

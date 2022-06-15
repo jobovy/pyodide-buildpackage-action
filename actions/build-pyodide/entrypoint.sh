@@ -11,8 +11,9 @@ then
     cd pyodide
     git checkout $PYODIDE_TAG
 else
+    sudo find pyodide -type d -exec chmod 755 {} \; 
+    sudo find pyodide -type f -exec chmod 755 {} \;
     cd pyodide
-    # Need to make sure emcc gets installed again when the cache is restored
-    rm -f emsdk/emsdk/.complete
+    source "emsdk/emsdk/emsdk_env.sh"   
 fi;
 make
