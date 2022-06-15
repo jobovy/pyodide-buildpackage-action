@@ -1,0 +1,17 @@
+name: "build-pyodide"
+description: "Build pyodide"
+inputs:
+  pyodide-tag:
+    description: "Pyodide tag or branch to use"
+    required: false
+    default: "0.20.0"
+  pyodide-cache-hit:
+    description: "Whether or not pyodide was loaded from the cache (True/False)"
+    required: false
+    default: "False"
+runs:
+  using: "docker"
+  image: Dockerfile
+  args:
+      - ${{ inputs.pyodide-tag }}
+      - ${{ inputs.pyodide-cache-hit }}

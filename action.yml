@@ -30,18 +30,45 @@ inputs:
     required: false
     default: "None"    
   build-deps:
-    description: "Whether or not to build runtime Python dependencies (True/False)"
+    description: "Whether or not to build runtime Python dependencies (True/False: default False)"
     required: false
-    default: "False" 
+    default: "False"
+  cache:
+    description: "Whether or not to cache the pyodide build environment (True/False; default: True)"
+    required: false
+    default: "True"     
 runs:
-  using: "docker"
-  image: Dockerfile
-  args:
-      - ${{ inputs.meta-yaml-path }}
-      - ${{ inputs.pyodide-tag }}
-      - ${{ inputs.output-dir }}
-      - ${{ inputs.package-name }}
-      - ${{ inputs.build-tag }}
-      - ${{ inputs.build-url }}
-      - ${{ inputs.all-wheels-output-dir }}
-      - ${{ inputs.build-deps }}
+  using: "composite"
+  steps:
+    - uses: actions/cache@v3
+      id: cache-pyodide
+      if: ${{ inputs.cache == 'True' || inputs.cache == 'true' }}
+      with:
+        path: pyodide/**
+        key: pyodide-cache-${{ inputs.pyodide-tag }}
+    - name: Build pyodide
+      uses: jobovy/pyodide-buildpackage-action/actions/build-pyodide@main
+      with:
+        pyodide-tag: ${{ inputs.pyodide-tag }}
+        pyodide-cache-hit: ${{ steps.cache-pyodide.outputs.cache-hit }}
+    - name: Build meta.yaml
+      uses: jobovy/pyodide-buildpackage-action/actions/build-meta@main
+      with: 
+        meta-yaml-path: ${{ inputs.meta-yaml-path }}
+        package-name: ${{ inputs.package-name }}
+        build-tag: ${{ inputs.build-tag }}
+        build-url: ${{ inputs.build-url }}
+        build-deps: ${{ inputs.build-deps }}
+    - name: Build package
+      uses: jobovy/pyodide-buildpackage-action/actions/build-package@main
+      with: 
+        package-name: ${{ inputs.package-name }}
+        output-dir: ${{ inputs.output-dir }}
+        all-wheels-output-dir: ${{ inputs.all-wheels-output-dir }}
+    # Just make everything executable, because a bunch of stuff needs to be
+    # and it isn't alltogether obvious which (not just .sh)
+    - name: Change permissions of pyodide directory
+      shell: bash 
+      run: |
+        sudo find pyodide -type d -exec chmod 755 {} \; 
+        sudo find pyodide -type f -exec chmod 755 {} \;

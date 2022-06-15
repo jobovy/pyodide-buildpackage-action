@@ -2,30 +2,24 @@
 
 # Parse inputs 
 META_YAML_PATH=`realpath $1`
-PYODIDE_TAG=$2
-OUTPUT_DIR=`realpath $3`
-if [ "$4" = "None" ]; then
+if [ "$2" = "None" ]; then
     PACKAGE_NAME=${GITHUB_REPOSITORY#*/}
 else
-    PACKAGE_NAME=$4
+    PACKAGE_NAME=$2
 fi
-if [ "$5" = "None" ]; then
-    if [ "$6" = "None" ]; then
+if [ "$3" = "None" ]; then
+    if [ "$4" = "None" ]; then
         PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$GITHUB_SHA.tar.gz
     else
-        PACKAGE_URL=$6
+        PACKAGE_URL=$4
     fi
 else
-    PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$5.tar.gz
+    PACKAGE_URL=https://github.com/$GITHUB_REPOSITORY/archive/$3.tar.gz
 fi
-ALL_WHEELS_OUTPUT_DIR=`realpath $7`
-BUILD_DEPS=$8
+BUILD_DEPS=$5
 
-# Get pyodide and setup pyodide tools
-git clone https://github.com/pyodide/pyodide
+# Get pyodide and setup pyodide tools (from build-pyodide)
 cd pyodide
-git checkout $2
-make
 
 # Put meta.yaml in place
 mkdir -v -p packages/$PACKAGE_NAME
@@ -66,13 +60,3 @@ yaml.dump(f,Path(f'packages/{PACKAGE_NAME}/meta_e.yaml'))"
     mv packages/$PACKAGE_NAME/meta_e.yaml packages/$PACKAGE_NAME/meta.yaml
 fi;
 cat packages/$PACKAGE_NAME/meta.yaml
-
-# Build and copy output to output directory
-python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
-echo "Build log"
-cat packages/$PACKAGE_NAME/build.log
-
-# Copy wheel to output dir
-mkdir -v -p $OUTPUT_DIR
-cp -v $ALL_WHEELS_OUTPUT_DIR/*$PACKAGE_NAME* $OUTPUT_DIR
-
