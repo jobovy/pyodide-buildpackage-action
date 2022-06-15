@@ -12,5 +12,7 @@ then
     git checkout $PYODIDE_TAG
 else
     cd pyodide
+    # Need to make sure emcc gets installed again when the cache is restored
+    rm -f emsdk/emsdk/.complete
 fi;
 make

@@ -11,8 +11,6 @@ ALL_WHEELS_OUTPUT_DIR=`realpath $3`
 
 # Get pyodide and setup pyodide tools (done in build-pyodide)
 cd pyodide
-# Need to make sure emcc gets installed again
-rm -f emsdk/emsdk/.complete
 make
 
 # Build and copy output to output directory
