@@ -14,6 +14,7 @@ cd pyodide
 make
 
 # Build and copy output to output directory
+mkdir -v -p $ALL_WHEELS_OUTPUT_DIR
 python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
 echo "Build log"
 cat packages/$PACKAGE_NAME/build.log
