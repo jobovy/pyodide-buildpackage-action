@@ -25,7 +25,7 @@ cd pyodide
 mkdir -v -p packages/$PACKAGE_NAME
 cp -v $META_YAML_PATH packages/$PACKAGE_NAME/meta.yaml
 # Need to download to compute the checksum, required when using url
-wget -v $PACKAGE_URL -O packages/$PACKAGE_NAME/package.tar.gz
+wget $PACKAGE_URL -O packages/$PACKAGE_NAME/package.tar.gz
 CHECKSUM=`sha256sum packages/$PACKAGE_NAME/package.tar.gz | awk '{ print $1 }'`
 # Edit meta.yaml
 sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta.yaml
