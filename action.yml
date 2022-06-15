@@ -47,12 +47,12 @@ runs:
         path: pyodide/**
         key: pyodide-cache-${{ inputs.pyodide-tag }}
     - name: Build pyodide
-      uses: jobovy/pyodide-buildpackage-action/actions/build-pyodide@cache
+      uses: jobovy/pyodide-buildpackage-action/actions/build-pyodide@main
       with:
         pyodide-tag: ${{ inputs.pyodide-tag }}
         pyodide-cache-hit: ${{ steps.cache-pyodide.outputs.cache-hit }}
     - name: Build meta.yaml
-      uses: jobovy/pyodide-buildpackage-action/actions/build-meta@cache
+      uses: jobovy/pyodide-buildpackage-action/actions/build-meta@main
       with: 
         meta-yaml-path: ${{ inputs.meta-yaml-path }}
         package-name: ${{ inputs.package-name }}
@@ -60,7 +60,7 @@ runs:
         build-url: ${{ inputs.build-url }}
         build-deps: ${{ inputs.build-deps }}
     - name: Build package
-      uses: jobovy/pyodide-buildpackage-action/actions/build-package@cache
+      uses: jobovy/pyodide-buildpackage-action/actions/build-package@main
       with: 
         package-name: ${{ inputs.package-name }}
         output-dir: ${{ inputs.output-dir }}
