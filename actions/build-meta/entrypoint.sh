@@ -32,7 +32,7 @@ sed --debug -i 's@.*url:.*@  url: '"$PACKAGE_URL"'@' packages/$PACKAGE_NAME/meta
 sed --debug -i 's@.*sha256:.*@  sha256: '"$CHECKSUM"'@' packages/$PACKAGE_NAME/meta.yaml
 sed --debug -i '/md5:/d' packages/$PACKAGE_NAME/meta.yaml
 # Need to move this to a file...
-if [ "$BUILD_DEPS" = "false" ];
+if [ "$BUILD_DEPS" = "false" ] || [ "$BUILD_DEPS" = "False" ];
 then
     export PACKAGE_NAME
     python -c "import os
