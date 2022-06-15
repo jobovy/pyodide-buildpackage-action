@@ -42,7 +42,7 @@ runs:
   steps:
     - uses: actions/cache@v3
       id: cache-pyodide
-      if: ${{ inputs.cache == 'True' or inputs.cache == 'true' }}
+      if: ${{ inputs.cache == 'True' || inputs.cache == 'true' }}
       with:
         path: pyodide/**
         key: pyodide-cache-${{ inputs.pyodide-tag }}
