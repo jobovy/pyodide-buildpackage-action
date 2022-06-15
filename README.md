@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: jobovy/pyodide-buildpackage-action@main
+    - uses: jobovy/pyodide-buildpackage-action@v1
     - uses: actions/upload-artifact@v2-preview
       with:
         name: package-wheel-pyodide
@@ -77,7 +77,7 @@ Whether or not to cache the pyodide build environment (True/False; default: True
 ### Custom ``meta.yaml`` location
 
 ```
-    - uses: jobovy/pyodide-buildpackage-action@main
+    - uses: jobovy/pyodide-buildpackage-action@v1
       with:
         meta-yaml-path: .github/pyodide_meta.yaml
 ```
@@ -87,7 +87,7 @@ Whether or not to cache the pyodide build environment (True/False; default: True
 E.g., to use the latest `main` branch
 
 ```
-    - uses: jobovy/pyodide-buildpackage-action@main
+    - uses: jobovy/pyodide-buildpackage-action@v1
       with:
         pyodide-tag: main
 ```
@@ -95,7 +95,7 @@ E.g., to use the latest `main` branch
 ### Build from a URL
 
 ```
-    - uses: jobovy/pyodide-buildpackage-action@main
+    - uses: jobovy/pyodide-buildpackage-action@v1
       with:
         package-name: galpy
         build-url: https://github.com/jobovy/galpy/archive/main.tar.gz
@@ -104,7 +104,7 @@ E.g., to use the latest `main` branch
 ### Build all dependencies of your package
 
 ```
-    - uses: jobovy/pyodide-buildpackage-action@main
+    - uses: jobovy/pyodide-buildpackage-action@v1
       with:
         meta-yaml-path: .github/pyodide_meta.yaml
         build-deps: True
