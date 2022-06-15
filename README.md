@@ -68,6 +68,10 @@ URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.
 
 Whether or not to build runtime Python dependencies (True/False; default: False). If you need a Python dependency during your build (e.g., `numpy`), then you'll have to run with `build-deps: True`.
 
+### `cache`
+
+Whether or not to cache the pyodide build environment (True/False; default: True). Note that the cache is very large (~7 GB currently), but it does significantly speed up subsequent runs.
+
 ## Advanced examples
 
 ### Custom ``meta.yaml`` location
