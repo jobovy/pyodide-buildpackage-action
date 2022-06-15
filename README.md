@@ -38,31 +38,31 @@ All inputs are optional.
 
 ### `meta-yaml-path`
     
-Path of the meta.yaml file (default: "meta.yaml")
+Path of the meta.yaml file (default: "meta.yaml").
 
 ### `pyodide-tag`
 
-Pyodide tag or branch to use (default: "0.20.0")
+Pyodide tag/branch/SHA to use (default: "0.20.0"). Because caching is done based on `pyodide-tag`, using `main` is not recommended, because the cache will not be updated for changes to `main`. 
 
 ### `output-dir`
 
-Directory for output package wheel( default: "wheelhouse")
+Directory for output package wheel( default: "wheelhouse").
 
 ### `all-wheels-output-dir`
 
-Directory for all built wheels, includes dependencies and their dependencies and so on (default: "wheelhouse-all")
+Directory for all built wheels, includes dependencies and their dependencies and so on (default: "wheelhouse-all").
 
 ### `package-name`
 
-Name of the package being built (default: repository name; needs to be set when building a URL)
+Name of the package being built (default: repository name; needs to be set when building a URL).
 
 ### `build-tag`
 
-When building the current repository, name of the branch/tag/SHA to build (default: commit's SHA); set either this or build-url (neither defaults to current SHA)
+When building the current repository, name of the branch/tag/SHA to build (default: commit's SHA); set either this or build-url (neither defaults to current SHA).
 
 ### `build-url`
 
-URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA)
+URL of package to build (e.g., https://github.com/jobovy/galpy/archive/main.tar.gz); set either this or build-tag (neither defaults to current SHA).
 
 ### `build-deps`
 
