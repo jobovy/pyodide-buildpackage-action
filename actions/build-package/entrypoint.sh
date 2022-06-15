@@ -9,11 +9,13 @@ fi
 OUTPUT_DIR=`realpath $2`
 ALL_WHEELS_OUTPUT_DIR=`realpath $3`
 
-# Get pyodide and setup pyodide tools (from build-pyodide)
+# Get pyodide and setup pyodide tools (done in build-pyodide)
 cd pyodide
+# Need to make sure emcc gets installed again
+rm -f emsdk/emsdk/.complete
+make
 
 # Build and copy output to output directory
-make
 python -m pyodide_build buildall --only "$PACKAGE_NAME" packages $ALL_WHEELS_OUTPUT_DIR
 echo "Build log"
 cat packages/$PACKAGE_NAME/build.log
