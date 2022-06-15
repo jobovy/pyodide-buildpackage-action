@@ -14,6 +14,6 @@ else
     sudo find pyodide -type d -exec chmod 755 {} \; 
     sudo find pyodide -type f -exec chmod 755 {} \;
     cd pyodide
-    source "emsdk/emsdk/emsdk_env.sh"   
+    . emsdk/emsdk/emsdk_env.sh
 fi;
 make
