@@ -11,8 +11,6 @@ then
     cd pyodide
     git checkout $PYODIDE_TAG
 else
-    sudo find pyodide -type d -exec chmod 755 {} \; 
-    sudo find pyodide -type f -exec chmod 755 {} \;
     cd pyodide
     . emsdk/emsdk/emsdk_env.sh
 fi;
